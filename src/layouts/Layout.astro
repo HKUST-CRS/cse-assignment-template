@@ -1,0 +1,18 @@
+---
+import "../styles/global.css";
+
+import BaseHead from "../components/BaseHead.astro";
+
+const { courseCode, assignmentCode, ...head } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>{courseCode} {assignmentCode}</title>
+		<BaseHead {...head} />
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>

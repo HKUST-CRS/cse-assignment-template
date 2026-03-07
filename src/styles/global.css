@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+@import "tailwindcss";
+
+.markdown-body {
+    box-sizing: border-box;
+    min-width: calc(200px * 8 / 7);
+    max-width: calc(980px * 8 / 7);
+    margin: 0 auto;
+    padding: 45px;
+
+    font-family: 'Inter', 'sans-serif' !important;
+    font-optical-sizing: auto !important;
+}
+
+code, kbd, samp {
+    font-family: 'JetBrains Mono', 'monospace' !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    @apply scroll-mt-4;
+}
+
+main li {
+    list-style-type: disc;
+}
+
+@media (max-width: 767px) {
+    .markdown-body {
+        padding: 16px;
+    }
+}
