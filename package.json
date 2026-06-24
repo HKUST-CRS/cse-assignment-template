@@ -2,6 +2,10 @@
   "name": "cse-assignment-template",
   "type": "module",
   "version": "0.0.1",
+  "prettier": {
+    "printWidth": 80,
+    "proseWrap": "always"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && node scripts/post-build.js",
@@ -21,6 +25,7 @@
   "devDependencies": {
     "adm-zip": "^0.5.17",
     "parcel": "^2.16.4",
+    "prettier": "^3.8.2",
     "zip-a-folder": "^6.1.0"
   }
 }
