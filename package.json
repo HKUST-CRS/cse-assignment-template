@@ -4,8 +4,8 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
+    "build": "astro build && node scripts/post-build.js",
+    "preview": "astro preview --outDir parcel-dist",
     "astro": "astro"
   },
   "dependencies": {
@@ -17,5 +17,10 @@
     "remark-math": "^6.0.0",
     "sharp": "^0.34.3",
     "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "adm-zip": "^0.5.17",
+    "parcel": "^2.16.4",
+    "zip-a-folder": "^6.1.0"
   }
 }

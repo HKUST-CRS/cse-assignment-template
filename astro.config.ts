@@ -8,7 +8,7 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 // https://astro.build/config
 export default defineConfig({
-  site: "https://example.com",
+  outDir: "./dist/astro",
 
   vite: {
     plugins: [tailwindcss()],
