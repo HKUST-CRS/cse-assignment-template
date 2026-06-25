@@ -6,12 +6,12 @@ import Layout from "../layouts/Layout.astro";
 
 const docs = await getCollection("docs");
 if (docs.length === 0) {
-	throw new Error('No docs found in the "docs" collection.');
+  throw new Error('No docs found in the "docs" collection.');
 }
 if (docs.length > 1) {
-	throw new Error(
-		'Multiple docs found in the "docs" collection. Expected only one.',
-	);
+  throw new Error(
+    'Multiple docs found in the "docs" collection. Expected only one.',
+  );
 }
 
 const doc = docs[0]!;
@@ -25,81 +25,73 @@ const links = data.links;
 ---
 
 <Layout {...data}>
-	<div class="markdown-body">
-		<div class="grid gap-8 grid-cols-4">
-			<main class="col-span-3">
-				<header>
-					<h3>{data.courseCode} {data.courseName}</h3>
-					<h1>{data.assignmentCode} {data.assignmentName}</h1>
-				</header>
-				<Content />
-				<div class="h-dvh"></div>
-			</main>
-			<aside
-				class="sticky top-0 self-start text-sm"
-				aria-label="Navigation Menu"
-			>
-				<h4>Page maintainers</h4>
-				<nav class="flex flex-col gap-2">
-					{
-						maintainers.map((maintainer) => (
-							<section>
-								<div class="font-semibold">
-									{maintainer.name}
-								</div>
-								<a href={`mailto:${maintainer.email}`}>
-									{maintainer.email}
-								</a>
-								{maintainer.note && (
-									<div class=" text-gray-500 text-xs">
-										{maintainer.note}
-									</div>
-								)}
-							</section>
-						))
-					}
-				</nav>
-				<h4>On this page</h4>
-				<nav>
-					<ol class="pl-0!">
-						{
-							headings.map((h) => (
-								<li
-									class={
-										{
-											1: "ml-0",
-											2: "ml-0",
-											3: "ml-4",
-											4: "ml-8",
-											5: "ml-12",
-											6: "ml-16",
-										}[h.depth] || ""
-									}
-								>
-									<a href={`#${h.slug}`}>{h.text}</a>
-								</li>
-							))
-						}
-					</ol>
-				</nav>
-				<h4>Links</h4>
-				<nav>
-					<ol class="pl-4! list-outside list-disc">
-						{
-							links.map((link) => (
-								<li>
-									<a href={link.link}>{link.name}</a>
-									{link.note && (
-										<div class=" text-gray-500 text-xs">
-											{link.note}
-										</div>
-									)}
-								</li>
-							))
-						}
-					</ol>
-				</nav>
-			</aside>
-		</div>
-	</div>
+  <div class="markdown-body">
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-4 lg:gap-8">
+      <main class="min-w-0 lg:col-span-3">
+        <header>
+          <h3>{data.courseCode} {data.courseName}</h3>
+          <h1>{data.assignmentCode} {data.assignmentName}</h1>
+        </header>
+        <Content />
+        <div class="h-dvh"></div>
+      </main>
+      <aside
+        class="min-w-0 border-t border-[var(--color-border-default)] pt-6 text-sm lg:sticky lg:top-0 lg:self-start lg:border-t-0 lg:pt-0"
+        aria-label="Navigation Menu"
+      >
+        <h4>Page maintainers</h4>
+        <nav class="flex flex-col gap-2">
+          {
+            maintainers.map((maintainer) => (
+              <section>
+                <div class="font-semibold">{maintainer.name}</div>
+                <a href={`mailto:${maintainer.email}`}>{maintainer.email}</a>
+                {maintainer.note && (
+                  <div class=" text-gray-500 text-xs">{maintainer.note}</div>
+                )}
+              </section>
+            ))
+          }
+        </nav>
+        <h4>On this page</h4>
+        <nav>
+          <ol class="pl-0!">
+            {
+              headings.map((h) => (
+                <li
+                  class={
+                    {
+                      1: "ml-0",
+                      2: "ml-0",
+                      3: "ml-4",
+                      4: "ml-8",
+                      5: "ml-12",
+                      6: "ml-16",
+                    }[h.depth] || ""
+                  }
+                >
+                  <a href={`#${h.slug}`}>{h.text}</a>
+                </li>
+              ))
+            }
+          </ol>
+        </nav>
+        <h4>Links</h4>
+        <nav>
+          <ol class="pl-4! list-outside list-disc">
+            {
+              links.map((link) => (
+                <li>
+                  <a href={link.link}>{link.name}</a>
+                  {link.note && (
+                    <div class=" text-gray-500 text-xs">{link.note}</div>
+                  )}
+                </li>
+              ))
+            }
+          </ol>
+        </nav>
+      </aside>
+    </div>
+  </div>
 </Layout>
