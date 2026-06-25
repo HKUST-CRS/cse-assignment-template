@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import { Parcel } from "@parcel/core";
 import { zip } from "zip-a-folder";
 

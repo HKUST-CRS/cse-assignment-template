@@ -2,30 +2,47 @@
   "name": "cse-assignment-template",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "prettier": {
+    "plugins": [
+      "prettier-plugin-astro"
+    ],
     "printWidth": 80,
     "proseWrap": "always"
+  },
+  "overrides": {
+    "yaml": "^2.8.3"
   },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && node scripts/post-build.js",
-    "preview": "astro preview --outDir parcel-dist",
+    "preview": "astro preview --outDir dist/parcel",
+    "check": "astro check",
     "astro": "astro"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.18",
-    "astro": "^5.16.6",
+    "@astrojs/markdown-remark": "^7.2.0",
+    "@tailwindcss/vite": "^4.3.1",
+    "astro": "^7.0.3",
+    "katex": "^0.17.0",
     "rehype-katex": "^7.0.1",
     "remark-alerts": "^0.0.1",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
-    "sharp": "^0.34.3",
-    "tailwindcss": "^4.1.18"
+    "sharp": "^0.35.2",
+    "tailwindcss": "^4.3.1",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
-    "adm-zip": "^0.5.17",
+    "@astrojs/check": "^0.9.9",
+    "@parcel/core": "^2.16.4",
+    "@types/node": "^26.0.1",
     "parcel": "^2.16.4",
-    "prettier": "^3.8.2",
-    "zip-a-folder": "^6.1.0"
+    "prettier": "^3.8.4",
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript": "^6.0.3",
+    "zip-a-folder": "^6.1.1"
   }
 }
