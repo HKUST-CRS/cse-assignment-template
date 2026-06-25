@@ -1,16 +1,109 @@
 ---
-import { ClientRouter } from 'astro:transitions';
+import { ClientRouter } from "astro:transitions";
 ---
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="color-scheme" content="light dark" />
+
+<script is:inline>
+  (() => {
+    function isTheme(theme) {
+      return theme === "light" || theme === "dark";
+    }
+
+    function currentTheme() {
+      return document.documentElement.dataset.theme !== "dark"
+        ? "light"
+        : "dark";
+    }
+
+    function preferredTheme() {
+      const theme = localStorage.getItem("theme");
+      if (isTheme(theme)) {
+        return theme;
+      }
+
+      return !window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "light"
+        : "dark";
+    }
+
+    function setTheme(theme) {
+      document.documentElement.classList.toggle("dark", theme === "dark");
+      document.documentElement.dataset.theme = theme;
+      syncMarkdownCss(theme);
+    }
+
+    function toggleTheme() {
+      const nextTheme = currentTheme() === "dark" ? "light" : "dark";
+      localStorage.setItem("theme", nextTheme);
+      setTheme(nextTheme);
+    }
+
+    function syncMarkdownCss(theme) {
+      const css = document.getElementById("github-markdown-css");
+      if (!(css instanceof HTMLLinkElement)) {
+        return;
+      }
+
+      const href =
+        theme === "dark" ? css.dataset.darkHref : css.dataset.lightHref;
+      if (href) {
+        css.href = href;
+      }
+    }
+
+    function bindThemeToggle() {
+      const button = document.querySelector("[data-theme-toggle]");
+      if (!button || button.dataset.bound === "true") {
+        return;
+      }
+
+      button.dataset.bound = "true";
+      button.addEventListener("click", toggleTheme);
+    }
+
+    setTheme(preferredTheme());
+
+    window.assignmentTheme = {
+      bindThemeToggle,
+      currentTheme,
+      setTheme,
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", bindThemeToggle, {
+        once: true,
+      });
+    } else {
+      bindThemeToggle();
+    }
+
+    document.addEventListener("astro:page-load", bindThemeToggle);
+  })();
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-<link rel="prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-light.min.css">
-<link rel="prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-dark.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown.min.css">
-<link id="github-markdown-css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown.min.css">
+<link
+  rel="prefetch"
+  href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-light.min.css"
+/>
+<link
+  rel="prefetch"
+  href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-dark.min.css"
+/>
+<link
+  id="github-markdown-css"
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-light.min.css"
+  data-light-href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-light.min.css"
+  data-dark-href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-dark.min.css"
+/>
+<script is:inline>
+  window.assignmentTheme?.setTheme(window.assignmentTheme.currentTheme());
+</script>
 
 <ClientRouter />

@@ -2,17 +2,19 @@
 import "../styles/global.css";
 
 import BaseHead from "../components/BaseHead.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
 
-const { courseCode, assignmentCode, ...head } = Astro.props;
+const { courseCode, assignmentCode, assignmentName, ...head } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<title>{courseCode} {assignmentCode}</title>
-		<BaseHead {...head} />
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <title>{courseCode} {assignmentCode} - {assignmentName}</title>
+    <BaseHead {...head} />
+  </head>
+  <body>
+    <ThemeToggle />
+    <slot />
+  </body>
 </html>
