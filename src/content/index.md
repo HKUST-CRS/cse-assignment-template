@@ -5,6 +5,7 @@ courseCode: COMP 1023
 courseName: Introduction to Python Programming
 assignmentCode: PA1
 assignmentName: Mathematical Expression Evaluator
+
 # The maintainer information shown in the sidebar of the page.
 # It supports multiple maintainers.
 # The note field is optional.
@@ -12,43 +13,55 @@ maintainers:
   - name: Harry Li
     email: yhliaf@connect.ust.hk
     note: Author
+  - name: Desmond Tsoi
+    email: desmond@ust.hk
+    note: Maintainer
+
 # The useful links for the assignment shown in the sidebar of the page.
 links:
   - name: Course Homepage
-    link: 'https://course.cse.ust.hk/comp1023'
-  - name: Formal Grammars
-    link: 'https://web.stanford.edu/class/archive/cs/cs143/cs143.1128/handouts/080%20Formal%20Grammars.pdf'
+    link: "https://course.cse.ust.hk/comp1023"
+  - name: Zinc
+    link: "http://zinc.cse.ust.hk/"
+    note: >-
+      To submit your work for this assignment.
+  - name: CSE Request System
+    link: "https://crs.cse.ust.hk/"
     note: >-
       A handout explaining the concept of formal grammars.
 ---
 
-<!-- Use this syntax for comments in the Markdown body. -->
+<!--
+Here is a basic guide to Markdown syntax:
+https://commonmark.org/help/
+In addition, this template also supports the following features:
+- inline and block math using $ and $$;
+- alerts (https://github.com/orgs/community/discussions/16925).
+-->
 
-<!-- Syntax for images in Markdown. -->
-![](IamProgrammer!.png)
-<!-- A caption is ###### -->
+![](resources/IamProgrammer!.png)
+
 ###### from https://github.com/SAWARATSUKI/KawaiiLogos
 
-<!-- ## defines a section. -->
 ## Introduction
 
-<!-- Paragraph -->
-In this assignment, you will implement a mathematical expression evaluator in Python. The evaluator will take a string input representing a mathematical expression and compute its value. The expressions can include basic arithmetic operations, parentheses, and variables.
+In this assignment, you will implement a mathematical expression evaluator in
+Python. The evaluator will take a string input representing a mathematical
+expression and compute its value. The expressions can include basic arithmetic
+operations, parentheses, and variables.
 
-<!-- The next ## defines another section. -->
-## Tasks
-
-<!-- ### defines a subsection. -->
-### Task 1: Tokenization
+## Tokenization
 
 The type of tokens are as follows:
 
-- **Number**: A sequence of digits, *possibly* containing a decimal point (e.g., `3`, `4.5`).
+- **Number**: A sequence of digits, _possibly_ containing a decimal point (e.g.,
+  `3`, `4.5`).
 - ...
 
 An example of tokenization is as follows:
 
 <!-- The code blocks are automatically with syntax highlighting! -->
+
 ```python
 def tokenize(expression):
   """
@@ -57,9 +70,24 @@ def tokenize(expression):
   pass
 ```
 
-### Task 2: Parsing
+## Parsing
 
-### Task 3: Evaluation
+A parse tree is a tree representation of the syntactic structure of a string of
+tokens.
+
+### Example of a Parse Tree
+
+```
+  +
+  / \
+3   *
+    / \
+  4   5
+```
+
+## Evaluation
+
+## Tasks
 
 ## Testing
 
